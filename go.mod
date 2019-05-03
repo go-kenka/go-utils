@@ -1,4 +1,4 @@
-module github.com/rxc-wujinahu/go-utils
+module github.com/rxc-wujianhua/go-utils
 
 go 1.12
 
