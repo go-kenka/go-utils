@@ -71,30 +71,7 @@ func StartXormSqlite3(initTable func(sqlEngine *xorm.Engine)) {
 
 	sqlEngine := OpenSqlite3Conn()
 
-	go keepAliveConn(sqlEngine)
-
 	initTable(sqlEngine)
-}
-
-// KeepAliveExec keep alive query and exec
-func KeepAliveExec(engine *xorm.Engine) error {
-	_, err := engine.Query(`SELECT 1`)
-	{
-		return err
-	}
-}
-
-// keepAliveConn 保持引擎连接
-func keepAliveConn(engine *xorm.Engine) {
-	for t := range time.Tick(time.Duration(reportDelaySec) * time.Second) {
-		if err := KeepAliveExec(engine); err != nil {
-			log.Logf("===keepalive sqlite3 Failed=== connections: %v, at: %v", countOpenConnections(), t)
-			engine = OpenSqlite3Conn()
-			continue
-		}
-
-		log.Logf("===keepalive sqlite3 Success=== open_connections: %v, at: %v", countOpenConnections(), t)
-	}
 }
 
 // countOpenConnections 返回当前引擎的状态
