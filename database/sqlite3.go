@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/rxc-wujinahu/go-utils/logger"
+	"github.com/rxc-wujianhua/go-utils/logger"
 
 	"github.com/go-log/log"
 	"github.com/go-xorm/core"
