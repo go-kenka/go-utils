@@ -52,6 +52,8 @@ func OpenSqlite3Conn() *xorm.Engine {
 	// 名称映射规则
 	tbMapper := core.NewPrefixMapper(core.GonicMapper{}, "bl_")
 	engine.SetMapper(tbMapper)
+	colMapper := core.NewPrefixMapper(core.GonicMapper{}, "")
+	engine.SetColumnMapper(colMapper)
 
 	// 开启调试模式
 	if os.Getenv("DEBUG_SQL") == "true" {
